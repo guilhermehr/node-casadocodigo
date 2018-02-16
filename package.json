@@ -22,6 +22,7 @@
   "homepage": "https://github.com/guilhermehr/node-casadocodigo#readme",
   "dependencies": {
     "ejs": "^2.5.7",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "mysql": "^2.15.0"
   }
 }
