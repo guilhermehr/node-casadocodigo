@@ -1,0 +1,26 @@
+{
+  "name": "node-casadocodigo",
+  "version": "1.0.0",
+  "description": "site da casa do codigo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guilhermehr/node-casadocodigo.git"
+  },
+  "keywords": [
+    "nodejs",
+    "node"
+  ],
+  "author": "guilhermehr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guilhermehr/node-casadocodigo/issues"
+  },
+  "homepage": "https://github.com/guilhermehr/node-casadocodigo#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
