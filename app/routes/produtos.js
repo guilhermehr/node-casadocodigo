@@ -21,6 +21,19 @@ module.exports = function (app) {
     // get implicito que é buscar
     app.get('/produtos', listaProdutos);
 
+    app.get('/produtos/json', function(req, res) {
+        var connection = app.infra.connectionFactory();
+        var produtosDAO = new app.infra.ProdutosDAO(connection);
+
+        produtosDAO.lista(function (err, results) {
+            console.log(err);
+            console.log(results);
+            res.json(results);
+        });
+        connection.end();
+    });
+
+
     app.get('/produtos/form', function(req, res) {
         //console.log("cheguei aqui");
         res.render('produtos/form');
