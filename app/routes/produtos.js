@@ -32,7 +32,7 @@ module.exports = function (app) {
 
     app.get('/produtos/form', function(req, res) {
         //console.log("cheguei aqui");
-        res.render('produtos/form');
+        res.render('produtos/form', {errosValidacao: {}, produto: {}});
     });
 
     // post implicito que é salvar
@@ -41,12 +41,13 @@ module.exports = function (app) {
         var produto = req.body;
         console.log(produto);
 
-        var validadorTitulo = req.assert('titulo', 'Título é obrigatório');
-        validadorTitulo.notEmpty();
+        req.assert('titulo', 'Título é obrigatório').notEmpty();
+        req.assert('preco', 'Formato inválido').isFloat();
+        
 
         var erros = req.validationErrors();
         if(erros) {
-            res.render('produtos/form');
+            res.render('produtos/form', {errosValidacao: erros, produto: produto});
             return;
         }
 
