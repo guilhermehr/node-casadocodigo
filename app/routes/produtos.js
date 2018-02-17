@@ -13,26 +13,22 @@ module.exports = function (app) {
         produtosDAO.lista(function (err, results) {
             console.log(err);
             console.log(results);
-            res.render('produtos/lista', {lista:results});
+
+            res.format({
+                html: function() {
+                    res.render('produtos/lista', {lista:results});
+                },
+                json: function() {
+                    res.json(results);
+                }
+            });
+            
         });
         connection.end();
     }
 
     // get implicito que é buscar
     app.get('/produtos', listaProdutos);
-
-    app.get('/produtos/json', function(req, res) {
-        var connection = app.infra.connectionFactory();
-        var produtosDAO = new app.infra.ProdutosDAO(connection);
-
-        produtosDAO.lista(function (err, results) {
-            console.log(err);
-            console.log(results);
-            res.json(results);
-        });
-        connection.end();
-    });
-
 
     app.get('/produtos/form', function(req, res) {
         //console.log("cheguei aqui");
@@ -48,6 +44,9 @@ module.exports = function (app) {
         var connection = app.infra.connectionFactory();
         var produtosDAO = new app.infra.ProdutosDAO(connection);
         produtosDAO.salva(produto, function(err, resultados) {
+
+            console.log(err);
+
             // sempre redirect depois de post - evitar problema do F5
             res.redirect('/produtos');
         });
