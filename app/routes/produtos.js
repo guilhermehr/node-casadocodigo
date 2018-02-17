@@ -1,5 +1,6 @@
 module.exports = function (app) {
-    app.get('/produtos', function (req, res) {
+
+    var listaProdutos = function (req, res) {
         //    console.log("Atendendo a requisição...");
         //    console.log("listando...");
 
@@ -15,7 +16,9 @@ module.exports = function (app) {
             res.render('produtos/lista', {lista:results});
         });
         connection.end();
-    });
+    }
+
+    app.get('/produtos', listaProdutos);
 
     app.get('/produtos/form', function(req, res) {
         //console.log("cheguei aqui");
@@ -30,7 +33,8 @@ module.exports = function (app) {
         var connection = app.infra.connectionFactory();
         var produtosDAO = new app.infra.ProdutosDAO(connection);
         produtosDAO.salva(produto, function(err, resultados) {
-            res.render('produtos/lista');
+            // sempre redirect depois de post - evitar problema do F5
+            res.redirect('/produtos');
         });
     });
 }
