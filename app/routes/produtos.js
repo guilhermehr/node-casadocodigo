@@ -18,6 +18,7 @@ module.exports = function (app) {
         connection.end();
     }
 
+    // get implicito que é buscar
     app.get('/produtos', listaProdutos);
 
     app.get('/produtos/form', function(req, res) {
@@ -25,7 +26,8 @@ module.exports = function (app) {
         res.render('produtos/form');
     });
 
-    app.post('/produtos/salva', function(req, res) {
+    // post implicito que é salvar
+    app.post('/produtos', function(req, res) {
 
         var produto = req.body;
         console.log(produto);
