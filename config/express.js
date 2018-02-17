@@ -6,6 +6,7 @@ versão sempre será criada.
 var express = require('express');
 var load = require('express-load');
 var bodyParser = require('body-parser');
+var expressValidator = require('express-validator');
 
 module.exports = function () {
 
@@ -14,8 +15,10 @@ module.exports = function () {
     app.set('view engine', 'ejs');
     app.set('views', './app/views');
 
+    // funções middleware que podem alterar o request
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
+    app.use(expressValidator());
 
     load('routes', { cwd: 'app' })
         .then('infra')
