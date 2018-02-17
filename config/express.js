@@ -3,12 +3,20 @@ para carregar sempre a mesma versão do express o código
 fica fora da function. Se for dentro da function uma nova 
 versão sempre será criada.
 */
-var app = require('express')();
-app.set('view engine','ejs');
-app.set('views','./app/views')
+var express = require('express');
+var load = require('express-load');
 
-module.exports = function() {
-    console.log("modulo express sendo carregado...")
+module.exports = function () {
+
+    var app = express();
+
+    app.set('view engine', 'ejs');
+    app.set('views', './app/views');
+
+    load('routes', { cwd: 'app' })
+        .then('infra')
+        .into(app);
+
     return app;
 }
 
