@@ -5,7 +5,9 @@ module.exports = function (app) {
 
         var connection = app.infra.connectionFactory();
 
-        var produtosBanco = app.infra.produtosBanco(connection);
+        // new cria um novo contexto, novo objeto para this, senão referencia o contexto
+        // de quem criou, nesse caso o express
+        var produtosBanco = new app.infra.ProdutosDAO(connection);
 
         produtosBanco.lista(function (err, results) {
             console.log(err);
