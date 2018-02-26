@@ -1,6 +1,6 @@
 module.exports = function (app) {
 
-    var listaProdutos = function (req, res) {
+    var listaProdutos = function (req, res, next) {
         //    console.log("Atendendo a requisição...");
         //    console.log("listando...");
 
@@ -13,6 +13,10 @@ module.exports = function (app) {
         produtosDAO.lista(function (err, results) {
             console.log(err);
             console.log(results);
+
+            if(err) {
+                return next(err);
+            }
 
             res.format({
                 html: function() {
